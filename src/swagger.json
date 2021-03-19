@@ -44,21 +44,87 @@
       "get": {
         "tags": ["Users"],
         "summary": "List users",
-        "description": "List all users"
+        "description": "List all users",
+        "parameters": [{
+          "in": "header",
+          "name": "user_id",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "required": "true"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/users/{user_id}/admin": {
       "patch": {
         "tags": ["Users"],
         "summary": "Turn user admin",
-        "description": "Give admin rights to an user"
+        "description": "Give admin rights to an user",
+        "parameters": [{
+          "in": "path",
+          "name": "user_id",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "required": "true"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "User are not exists"
+          }
+        }
       }
     },
     "/users/{user_id}": {
       "get": {
         "tags": ["Users"],
         "summary": "See user",
-        "description": "Get user details"
+        "description": "Get user details",
+        "parameters": [{
+          "in": "path",
+          "name": "user_id",
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "required": "true"
+        }],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
       }
     }
   }
